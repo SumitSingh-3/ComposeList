@@ -26,5 +26,6 @@ class ApiConfig {
         }
 
         const val BASE_URL = "https://api.nytimes.com/"
+        const val IMAGE_BASE_URL = "https://static01.nyt.com/"
     }
 }

@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,16 +20,11 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
-import coil.compose.rememberAsyncImagePainter
-import coil.compose.rememberImagePainter
-import com.example.myapplication.network.api.ApiConfig.Companion.BASE_URL
+import com.example.myapplication.network.api.ApiConfig.Companion.IMAGE_BASE_URL
 import com.example.myapplication.network.models.Doc
 import com.example.myapplication.ui.theme.MyApplicationTheme
 import com.example.myapplication.ui.viewmodel.MainViewModel
@@ -59,11 +53,12 @@ class MainActivity : ComponentActivity() {
                     LazyColumn {
 
                         res.value?.response?.docs?.let {
-                            items(it){
-                                Card(it, Modifier
-                                    .padding(10.dp)
-                                    .fillMaxWidth()
-                                    .wrapContentHeight()
+                            items(it) {
+                                Card(
+                                    it, Modifier
+                                        .padding(10.dp)
+                                        .fillMaxWidth()
+                                        .wrapContentHeight()
                                 )
                             }
                         }
@@ -93,7 +88,7 @@ fun Card(item: Doc, modifier: Modifier = Modifier) {
             Text(text = item.headline.main, fontStyle = FontStyle.Normal, color = Color.Black)
             Text(text = item.abstract, color = Color.LightGray)
             AsyncImage(
-                model =  BASE_URL + item.multimedia[0].url,
+                model = IMAGE_BASE_URL + item.multimedia[0].url,
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
